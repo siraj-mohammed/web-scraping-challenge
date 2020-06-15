@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Mission To Mars</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+</head>
+
+<body>
+  <!-- Jumbotron -->
+  <div class="container text-center jumbotron">
+    <h1><strong>Mission to Mars</strong></h1>
+	<br/>
+    <a class="btn btn-large btn-primary" href="/scrape">Scrape New Data</a>
+  </div>
+
+  <!-- Container Begins -->
+  <div class="container mt-4">
+    <!-- Mars News -->
+    <div class="row">
+      <div class="col-lg-12">
+        <h3>Latest Mars News</h3>
+        <h4>{{mars_data.news_title}}</h4>
+        <p>{{mars_data.news_p}}</p>
+      </div>
+    </div>
+    <!-- Featured Image, Weather and Facts -->
+    <div class="row">
+      <div class="col-lg-8">
+        <h3>Featured Mars Image</h3>
+        <img class="img-fluid" src="{{mars_data.featured_image_url}}" alt="Mars Featured Image" />
+      </div>
+      <div class="col-lg-4">
+        <div class="card" style="margin-top: 20px;">
+          <div class="card-body">
+			<h5 class="card-title">Current Weather on Mars</h5>
+            <p class="card-text">{{mars_data.current_weather}}</p>
+          </div>
+        </div>
+        <br />
+		<h5>Mars Facts</h5>
+        {{mars_data.mars_facts|safe}}
+      </div>
+    </div>
+    <!-- Hemispheres -->
+    <div class="row mt-5">
+      <div class="col-lg-12">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3 class="text-center">Mars Hemispheres</h3>
+          </div>
+        </div>
+        <div class="row">
+          {% for hemisphere in mars_data['hemisphere_image_urls'] %}
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <img class="img-fluid" src="{{hemisphere.img_url}}" alt="{{hemisphere.title}}" />
+                <h4>{{hemisphere.title}}</h4>
+              </div>
+            </div>
+          </div>
+		  {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Container Ends -->
+
+</body>
+
+</html>
